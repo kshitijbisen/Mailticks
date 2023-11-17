@@ -18,5 +18,9 @@ export const API_URLS={
     toggleStarredEmails:{
         endpoint:'starred',
         method:'POST'
+    },
+    getCategory:{
+        endpoint:'getCategory',
+        method:'GET'
     }
 }

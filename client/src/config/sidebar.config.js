@@ -1,4 +1,4 @@
-import {Photo,StarBorderOutlined,SendOutlined, InsertDriveFileOutlined, DeleteOutlined, MailOutline} from '@mui/icons-material'
+import {Photo,StarBorderOutlined,SendOutlined, InsertDriveFileOutlined, DeleteOutlined, MailOutline,Dashboard} from '@mui/icons-material'
 export const SIDEBAR_DATA=[
     {
         name:'inbox',

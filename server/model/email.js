@@ -33,6 +33,10 @@ const EmailSchema = mongoose.Schema({
     type: {
         type: String,
         required: true,
+    },
+    category:{
+        type:String,
+        required:false
     }
 })
 

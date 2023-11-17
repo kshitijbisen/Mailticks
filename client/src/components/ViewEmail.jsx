@@ -1,4 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
+import Feedback from "./Feedback.jsx"
 import { useOutletContext, useLocation } from "react-router-dom";
 import { ArrowBack, Delete } from "@mui/icons-material";
 import { emptyProfilePic } from '../constants/constant';
@@ -59,7 +60,10 @@ const ViewEmail = () => {
     }
     return (
         <Box style={openDrawer ? { marginLeft: 250 } : { width: '100%' }}>
-
+            {
+                email?.type==='inbox'?
+                    <Feedback/> : <></>
+            }
             <IconWrapper>
                 <ArrowBack onClick={() => window.history.back()} color="action" fontSize="small" />
                 <Delete color="action" fontSize="small" style={{ marginLeft: "40px" }} onClick={()=>deleteEmail()}/>

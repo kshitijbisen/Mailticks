@@ -45,6 +45,7 @@ for email_id in email_ids:
     # Print the email details
     subject, _ = decode_header(msg["Subject"])[0]
     from_, _ = decode_header(msg.get("From"))[0]
+    date_, _ = decode_header(msg.get("Date"))[0]
     content=""
     if msg.is_multipart():
         for part in msg.walk():
@@ -53,9 +54,17 @@ for email_id in email_ids:
     else:
         content=content+msg.get_payload(decode=True).decode("utf-8")
     thisdict = {
+    "to":"test.mailticks@gmail.com",
     "from": from_,
     "subject": subject,
-    "body": content
+    "body": content,
+    "Date":date_,
+    "image":"",
+    "starred":False,
+    "name":from_.split('@')[0],
+    "starred":False,
+    "bin":False,
+    "type":"inbox"
     }   
     mailList.append(thisdict)
 # Logout and close the connection
@@ -63,7 +72,7 @@ mail.logout()
 print(mailList)
 
 
-uri = "mongodb+srv://mailticks:<password>@gmailcluster.nk4rv0b.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://mailticks:mailticks2023@gmailcluster.nk4rv0b.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -74,3 +83,4 @@ try:
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
+collection.insert_many(mailList)

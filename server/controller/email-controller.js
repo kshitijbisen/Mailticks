@@ -1,5 +1,6 @@
 import { response } from "express";
 import Email from "../model/email.js";
+import Category from "../model/category.js";
 
 export const saveSentEmails = async (request, response) => {
     try {
@@ -23,7 +24,7 @@ export const getEmails = async (request, response) => {
         } else if (request.params.type === 'allmail') {
             emails = await Email.find({});
         } else if (request.params.type === 'inbox') {
-            emails = [];
+            emails = await Email.find({ type : 'inbox' });
         } else {
             emails = await Email.find({ type: request.params.type });
         }
@@ -47,5 +48,26 @@ export const toggleStarredEmails=async (request, response) => {
         return response.status(200).json("Email is starred")
     } catch (error) {
         response.status(500).json(error.message);   
+    }
+}
+export const createCategory = async (request, response) => {
+    try {
+        const category = await new Category(request.body);
+        category.save();
+
+        response.status(200).json('Category saved');
+    } catch (error) {
+        response.status(500).json(error.message);
+    }
+}
+
+export const getCategory = async (request, response) => {
+    try {
+        let category;
+        category = await Category.find({});
+
+        response.status(200).json(category);
+    } catch (error) {
+        response.status(500).json(error.message);
     }
 }
