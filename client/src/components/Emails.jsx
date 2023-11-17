@@ -8,14 +8,17 @@ import Email  from './Email'
 import useApi from "../hooks/useApi";
 const Emails=()=>{
     const {type}=useParams();
+    console.log(type)
     const {openDrawer}=useOutletContext();
     const getEmailsService = useApi(API_URLS.getEmailFromType);
     const [selectedEmails, setSelectedEmails]=useState([]);
     const[refreshScreen,setRefreshScreen]=useState(false);
     const moveEmailsToBinService=useApi(API_URLS.moveEmailsToBin);
+    const getCategoryService=useApi(API_URLS.getCategory);
     
     useEffect(() => {
         getEmailsService.call({}, type);
+        getCategoryService.call({});
     }, [type,refreshScreen])
 
     const selectAllEmails=(e)=>{
@@ -54,6 +57,7 @@ const Emails=()=>{
                     email={email}
                     selectedEmails={selectedEmails}
                     setRefreshScreen={setRefreshScreen}
+                    getCategoryService={getCategoryService}
                    />)
                    )
 }

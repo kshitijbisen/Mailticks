@@ -1,4 +1,4 @@
-import {Box, Typography, Checkbox} from '@mui/material'
+import {Box, Typography, Checkbox, Chip} from '@mui/material'
 import {Star, StarBorder} from '@mui/icons-material'
 import styled from '@emotion/styled'
 import { useNavigate } from "react-router-dom";
@@ -33,9 +33,10 @@ const Date=styled(Typography)({
     fontSize:'12px',
     color:'#5F6368'
 })
-const Email=({email, selectedEmails,setRefreshScreen})=>{
+const Email=({email, selectedEmails,setRefreshScreen,getCategoryService})=>{
     const  navigate=useNavigate();
     const toggleStarredService=useApi(API_URLS.toggleStarredEmails);
+    
     const toggleStarredMails=()=>{
         toggleStarredService.call({id:email._id,value:!email.starred})
         setRefreshScreen(prevState=>!prevState);
@@ -51,9 +52,13 @@ const Email=({email, selectedEmails,setRefreshScreen})=>{
             }
             
             <Box onClick={()=>navigate(routes.view.path,{state:{email:email}})}>
-            <Typography style={{width:'200px', overflow:'hidden'}}>{email.name}</Typography>
+            <Typography style={{width:'300px', overflow:'hidden'}}>{email.name}</Typography>
             <Indicator>inbox</Indicator>
-            <Typography>{email.subject} {email.body && '-'} {email.body}</Typography>
+            <Typography noWrap style={{width:'300px', overflow:'hidden'}}>{email.subject} {email.body && '-'} {email.body}</Typography>
+            {
+            email?.type==='inbox'?
+            <Chip label={email.category} />:<></>
+            }       
             <Date>{new window.Date(email.date).getDate()} {new window.Date(email.date).toLocaleDateString('default', {month:'long'})}</Date>
             </Box>
         </Wrapper>

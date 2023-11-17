@@ -41,7 +41,7 @@ const OptionsWrapper=styled(Box)(
     })
 const Header = ({ toggleDrawer }) =>{
     return(
-        <StyledAppBar position='static' elevation={0}>
+        <StyledAppBar position='sticky' elevation={0}>
                 <Toolbar>
                     <MenuIcon color='action' onClick={toggleDrawer}/>
                     <img src={logo} alt="MAILTICKS" style={{width:190 , marginLeft:15,marginTop:0}}/>
