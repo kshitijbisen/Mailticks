@@ -15,12 +15,16 @@ const Emails=()=>{
     const[refreshScreen,setRefreshScreen]=useState(false);
     const moveEmailsToBinService=useApi(API_URLS.moveEmailsToBin);
     const getCategoryService=useApi(API_URLS.getCategory);
-    
+    // const[color,setColor]=useState("");
+    useEffect(() => {
+        getCategoryService.call({});
+    }, [])
     useEffect(() => {
         getEmailsService.call({}, type);
-        getCategoryService.call({});
     }, [type,refreshScreen])
-
+    // const categoryInfo = getCategoryService?.response?.find(item => item.category === email.category);
+    // setColor(categoryInfo?.color);
+    
     const selectAllEmails=(e)=>{
         if(e.target.checked){
             const emails= getEmailsService?.response?.map(email=>email._id);
@@ -40,14 +44,21 @@ const Emails=()=>{
 
     }
     return (
-        <Box style={openDrawer ? {marginLeft:250, width:'calc(100%-250px)'} : {width:'100%'}}>
+        <Box style={openDrawer ? {marginLeft:250,width:'calc(100%-250px)',background:'#001f2a',borderStyle:'solid',
+        borderLeft:0,
+        borderTop:'500',
+        borderRight:0,
+        borderBottom:0,
+        borderColor:'#00658e'} : {width:'100%',background:'#001f2a',borderStyle:'solid', borderLeft:0,
+        borderTop:'500',
+        borderRight:0,
+        borderBottom:0,
+        borderColor:'#00658e'}}>
             <Box style={
                 {padding:"20px 10px 0 10px",display:'flex', alignItems:'center'}
                 }>
-                <Checkbox size="small" onChange={(e)=>selectAllEmails(e)}/>
-                <DeleteOutline onClick={(e)=> deletedSelectedEmails(e)
-
-                }/>
+                <Checkbox size="small" style={{color:"#FFFFFF"}} onChange={(e)=>selectAllEmails(e)}/>
+                <DeleteOutline style={{color:"#FFFFFF"}} onClick={(e)=> deletedSelectedEmails(e)}/>
                 </Box>
                 <List>
                     {
@@ -57,7 +68,7 @@ const Emails=()=>{
                     email={email}
                     selectedEmails={selectedEmails}
                     setRefreshScreen={setRefreshScreen}
-                    getCategoryService={getCategoryService}
+                    category={getCategoryService}
                    />)
                    )
 }

@@ -13,7 +13,7 @@ const Main = () =>{
         setOpenDrawer(prevState => !prevState);
     }
     return(
-        <>
+        <Box style={{background:'#033431'}}>
         <Header toggleDrawer={toggleDrawer}/>
         <Box>
         <Sidebar openDrawer={openDrawer}/>
@@ -21,7 +21,7 @@ const Main = () =>{
             <Outlet context={{openDrawer}}/>
         </Suspense>
         </Box>
-        </>
+        </Box>
     )
 }
 export default Main;

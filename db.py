@@ -121,7 +121,7 @@ Categories:
     "starred":False,
     "bin":False,
     "type":"inbox",
-    "category":response.text
+    "category":response.text.strip()
 }   
     mailList.append(thisdict)
 # Logout and close the connection

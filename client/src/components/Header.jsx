@@ -1,12 +1,13 @@
 import {AppBar, Toolbar, styled,InputBase,Box} from '@mui/material';
 import {Menu as MenuIcon,Tune, Search, HelpOutlineOutlined,SettingsOutlined,AppsOutlined,AccountCircleOutlined} from '@mui/icons-material';
+import { useState } from 'react';
 
 import shadows from '@mui/material/styles/shadows';
 import logo from '../constants/logo_mailtics.png';
+import CreateCategory from './CreateCategory';
 const StyledAppBar=styled(AppBar)(
     {
-        background:'#FFFFFF'
-        
+        background:'#001f2a',
     }
 )
 const SearchWrapper=styled(Box)(
@@ -20,6 +21,7 @@ const SearchWrapper=styled(Box)(
         height:44,
         display:'flex',
         alignItems:'center',
+    
         justifyContent:'space-between',
         padding: '0 20px',
         '& > div':{
@@ -40,10 +42,16 @@ const OptionsWrapper=styled(Box)(
 
     })
 const Header = ({ toggleDrawer }) =>{
+    const [openCreteCategory,setOpenCreteCategory]=useState(false);
+    const OnComposeClick=(e)=>{
+        e.preventDefault();
+        setOpenCreteCategory(true);
+        console.log("hello")
+    }
     return(
         <StyledAppBar position='sticky' elevation={0}>
                 <Toolbar>
-                    <MenuIcon color='action' onClick={toggleDrawer}/>
+                    <MenuIcon color='action' style={{color:"#FFFFFF"}} onClick={toggleDrawer}/>
                     <img src={logo} alt="MAILTICKS" style={{width:190 , marginLeft:15,marginTop:0}}/>
                     <SearchWrapper>
                         <Search color='action'/>
@@ -51,12 +59,13 @@ const Header = ({ toggleDrawer }) =>{
                         <Tune color='action'/>
                     </SearchWrapper>
                     <OptionsWrapper>
-                        <HelpOutlineOutlined color='action'/>
-                        <SettingsOutlined color='action'/>
-                        <AppsOutlined color='action'/>
-                        <AccountCircleOutlined color='action'/>
+                        {/* <HelpOutlineOutlined color='action'/> */}
+                        <SettingsOutlined style={{color:"#FFFFFF"}} color='action' onClick={(e)=>OnComposeClick(e)}/>
+                        {/* <AppsOutlined color='action'/>
+                        <AccountCircleOutlined color='action'/> */}
                     </OptionsWrapper>
                 </Toolbar>
+                <CreateCategory openCreateCategory={openCreteCategory} setOpenCreateCategory={setOpenCreteCategory}/>
             </StyledAppBar>
 
     )

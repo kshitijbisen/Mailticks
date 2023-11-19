@@ -22,5 +22,17 @@ export const API_URLS={
     getCategory:{
         endpoint:'getCategory',
         method:'GET'
+    },
+    updateLabel:{
+        endpoint:'updateLabel',
+        method:'POST'
+    },
+    savefeedback:{
+        endpoint:'savefeedback',
+        method:'POST'
+    },
+    createcategory:{
+        endpoint:'createcategory',
+        method:'POST'
     }
 }

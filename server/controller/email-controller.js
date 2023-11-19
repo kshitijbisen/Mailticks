@@ -1,6 +1,7 @@
 import { response } from "express";
 import Email from "../model/email.js";
 import Category from "../model/category.js";
+import Feedback from "../model/feedback.js";
 
 export const saveSentEmails = async (request, response) => {
     try {
@@ -42,6 +43,14 @@ export const moveEmailsToBin = async (request, response) => {
         response.status(500).json(error.message);   
     }
 }
+export const updateEmailLabel=async (request, response) => {
+    try {
+        await Email.updateOne({ _id:request.body.id }, { $set: { category: request.body.value }});
+        return response.status(200).json("Email Label changed")
+    } catch (error) {
+        response.status(500).json(error.message);   
+    }
+}
 export const toggleStarredEmails=async (request, response) => {
     try {
         await Email.updateOne({ _id:request.body.id }, { $set: { starred: request.body.value }});
@@ -50,7 +59,7 @@ export const toggleStarredEmails=async (request, response) => {
         response.status(500).json(error.message);   
     }
 }
-export const createCategory = async (request, response) => {
+export const createcategory = async (request, response) => {
     try {
         const category = await new Category(request.body);
         category.save();
@@ -71,3 +80,14 @@ export const getCategory = async (request, response) => {
         response.status(500).json(error.message);
     }
 }
+export const savefeedback = async (request, response) => {
+    try {
+        const feedback = await new Feedback(request.body);
+        feedback.save();
+
+        response.status(200).json('Feedback saved');
+    } catch (error) {
+        response.status(500).json(error.message);
+    }
+}
+

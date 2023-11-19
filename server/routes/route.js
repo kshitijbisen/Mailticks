@@ -1,5 +1,5 @@
 import express from 'express';
-import { saveSentEmails, getEmails,moveEmailsToBin,toggleStarredEmails,createCategory,getCategory} from '../controller/email-controller.js';
+import { saveSentEmails, getEmails,moveEmailsToBin,toggleStarredEmails,createcategory,getCategory, updateEmailLabel,savefeedback} from '../controller/email-controller.js';
 
 const routes=express.Router();
 routes.post('/save',saveSentEmails)
@@ -8,5 +8,8 @@ routes.post('/save-draft',saveSentEmails)
 routes.post('/bin',moveEmailsToBin)
 routes.post('/starred',toggleStarredEmails)
 routes.get('/getcategory',getCategory)
-routes.post('/createcategory',createCategory)
+routes.post('/createcategory',createcategory)
+routes.post('/updatelabel',updateEmailLabel)
+routes.post('/savefeedback',savefeedback)
+
 export default routes;
