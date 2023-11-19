@@ -7,24 +7,26 @@ import useApi from "../hooks/useApi";
 import { API_URLS } from "../services/api.urls";
 const IconWrapper = styled(Box)({
     padding: 15,
-
+    color: '#FFFFFF'
 
 })
 const Container = styled(Box)({
     marginLeft: 15,
+    background:'#001f2a',
     width:'100%',
+    color: '#FFFFFF',
     '&>div':{
         display: 'flex',
         '&>p>span': {
             fontSize: 12,
-            color: '#5E5E5E'
+            color: '#FFFFFF'
         }
     }
 
 })
 const Date = styled(Box)({
     margin: "0 50px 0 auto",
-    color: '#5E5E5E',
+    color: '#FFFFFF',
 
 })
 
@@ -59,14 +61,14 @@ const ViewEmail = () => {
         window.history.back();
     }
     return (
-        <Box style={openDrawer ? { marginLeft: 250 } : { width: '100%' }}>
+        <Box style={openDrawer ? {paddingLeft:'10px',background:'#001f2a',marginLeft: 250,color: '#FFFFFF' } : { background:'#001f2a',width: '100%' ,color: '#FFFFFF'}}>
             {
                 email?.type==='inbox'?
-                    <Feedback/> : <></>
+                    <Feedback email={email}/> : <></>
             }
             <IconWrapper>
-                <ArrowBack onClick={() => window.history.back()} color="action" fontSize="small" />
-                <Delete color="action" fontSize="small" style={{ marginLeft: "40px" }} onClick={()=>deleteEmail()}/>
+                <ArrowBack style={{color: '#FFFFFF'}} onClick={() => window.history.back()} color="action" fontSize="small" />
+                <Delete color="action" fontSize="small" style={{ marginLeft: "40px",color: '#FFFFFF' }} onClick={()=>deleteEmail()}/>
             </IconWrapper>
 
 
