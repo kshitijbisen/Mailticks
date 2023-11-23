@@ -43,8 +43,7 @@ const Email=({email, selectedEmails,setRefreshScreen,category})=>{
     const  navigate=useNavigate();
     const toggleStarredService=useApi(API_URLS.toggleStarredEmails);
     const categoryArray = category?.response || [];
-    const categoryInfo = categoryArray.find(item => item.category === 'job');
-
+    const categoryInfo = categoryArray.find(item => item.category === email.category);
     
     
     const toggleStarredMails=()=>{
@@ -63,13 +62,14 @@ const Email=({email, selectedEmails,setRefreshScreen,category})=>{
             {/* color={col?col:"#"} */}
             <Box onClick={()=>navigate(routes.view.path,{state:{email:email}})}>
             <Typography style={{width:'300px', overflow:'hidden'}}>{email.name}</Typography>
-            <Indicator>inbox</Indicator>
-            <Typography noWrap style={{width:'300px', overflow:'hidden'}}>{email.subject} {email.body && '-'} {email.body}</Typography>
+            {/* <Indicator>inbox</Indicator> */}
+            <Typography noWrap style={{width:'400px', overflow:'hidden'}}>{email.subject} {email.body && '-'} {email.body}</Typography>
             {
             email?.type==='inbox'?
-            <Chip label={email.category} style={{background:categoryInfo.color}}/>:<></>
+            <Chip label={email.category} style={{background:categoryInfo.color, minWidth:'100px',marginLeft:'100px'}}/>:<></>
             }       
-            <Date>{new window.Date(email.date).getDate()} {new window.Date(email.date).toLocaleDateString('default', {month:'long'})}</Date>
+        
+            <Date>{new window.Date(email.Date).getDate()} {new window.Date(email.Date).toLocaleDateString('default', {month:'long'})}</Date>
             </Box>
         </Wrapper>
     )

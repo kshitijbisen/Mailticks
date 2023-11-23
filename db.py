@@ -66,6 +66,7 @@ parameters = {
     "top_p": 0.8,
     "top_k": 40
 }
+
 model = TextGenerationModel.from_pretrained("text-bison")
 
 for email_id in email_ids:
@@ -79,8 +80,11 @@ for email_id in email_ids:
     # Print the email details
     subject, _ = decode_header(msg["Subject"])[0]
     from_, _ = decode_header(msg.get("From"))[0]
-    date_, _ = decode_header(msg.get("Date"))[0]
-    date_object = datetime.strptime(date_, "%a, %d %b %Y %H:%M:%S %z")
+    date_, _ = (decode_header(msg.get("Date"))[0])
+    
+    date_object =datetime.strptime(date_, "%a, %d %b %Y %H:%M:%S %z")
+    print(date_object)
+
     content=""
     if msg.is_multipart():
         for part in msg.walk():
@@ -89,26 +93,17 @@ for email_id in email_ids:
     else:
         content=content+msg.get_payload(decode=True).decode("utf-8")
     response = model.predict(
-    """Define the categories for the text below?
+"""Define the categories for the text below?
 Options:
-- job
-- feedback
+- feedback  (Mails regarding feedbacks about products and services from users)
+- job (Mails regarding job recruitment and job applications from companies and recruiters or HR)
 
-Text: To expand our workforce, we are seeking knowledgeable and proficient subject matter experts (SMEs). You will be essential to the creation and improvement of services or procedures as a subject matter expert. The perfect applicant will be knowledgeable about the field, possess a solid understanding of its concepts, and be dedicated to their work.
-Selected intern's day-to-day responsibilities include:
-1. Taking questions on a daily basis
-2. Structuring them in alignment with the guidelines
-3. Ensuring to submit assigned work on time and it should be error-free
-Categories: job
-
-Text: The experience was amazing and the product working good for us.
-Categories: feedback
-
-Text: {body}
+Text: """+content+"""
 Categories:
 """,
     **parameters
 )
+    print(response.text)
     thisdict = {
     "to":"test.mailticks@gmail.com",
     "from": from_.split('<')[1].split('>')[0].strip(),
