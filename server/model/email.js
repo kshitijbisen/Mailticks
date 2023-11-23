@@ -11,8 +11,8 @@ const EmailSchema = mongoose.Schema({
     },
     subject: String,
     body: String,
-    date: {
-        type: Date,
+    Date: {
+        type:Date,
         required: true
     },
     image: String,
