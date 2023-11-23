@@ -92,9 +92,9 @@ const ViewEmail = () => {
                         </Typography>
 
                         <Date>
-                            {new window.Date(email.date).getDate()}&nbsp;
-                            {new window.Date(email.date).toLocaleDateString('default', { month: 'long' })}&nbsp;
-                            {new window.Date(email.date).getFullYear()}
+                            {new window.Date(email.Date).getDate()}&nbsp;
+                            {new window.Date(email.Date).toLocaleDateString('default', { month: 'long' })}&nbsp;
+                            {new window.Date(email.Date).getFullYear()}
                         </Date>
 
                     </Box>
