@@ -6,7 +6,7 @@ const options = {
   headers: {
     accept: 'application/json',
     'content-type': 'application/json',
-    authorization: 'Bearer qmbakF4ktFODP3sajXeCbqUGZv2IjspPLoda4Z2X'
+    authorization: 'Bearer YOUR_KEY'
   },
   data: {
     return_documents: false,
