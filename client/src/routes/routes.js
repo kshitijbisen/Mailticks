@@ -2,6 +2,7 @@ import { lazy } from "react";
 const Emails=lazy(()=>import("../components/Emails"));
 const Main=lazy(()=> import("../pages/Main"));
 const ViewEmail =lazy(()=>import("../components/ViewEmail"))
+const Search =lazy(()=>import("../components/Search"))
 const routes={
     main:{
         path:'/',
@@ -14,6 +15,10 @@ const routes={
     view:{
         path:'/view',
         element:ViewEmail
+    },
+    search:{
+        path:'/search',
+        element:Search
     },
     invalid:{
         path:'/*',

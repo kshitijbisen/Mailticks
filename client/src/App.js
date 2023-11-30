@@ -13,7 +13,8 @@ const router=createBrowserRouter(
       <Route path={routes.main.path} element={<routes.main.element />} >
 
 
-        <Route path={`${routes.emails.path}/:type`} element={<routes.emails.element />} errorElement={<ErrorComponent />} />
+        <Route path={`${routes.emails.path}/:type/:category?`} element={<routes.emails.element />} errorElement={<ErrorComponent />} />
+        <Route path={routes.search.path} element={<routes.search.element />} errorElement={<ErrorComponent />} />
         <Route path={routes.view.path} element={<routes.view.element />} errorElement={<ErrorComponent />} />
 
 

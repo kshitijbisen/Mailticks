@@ -70,6 +70,7 @@ const CreateCategory=({openCreateCategory,setOpenCreateCategory})=>{
         const payload={
             category:categoryData.category,
             color:color,
+            description:categoryData.description
         }
      createCategory.call(payload);
      setOpenCreateCategory(false);
@@ -87,6 +88,13 @@ const CreateCategory=({openCreateCategory,setOpenCreateCategory})=>{
         </Header>
         <Box style={{display:'grid',gap:'20px',padding:'20px'}}>
         <TextField id="standard-basic" label="Create Valid Category" variant="standard" size="small" name='category' onChange={(e)=>onValueChange(e)} />
+        <TextField
+            multiline
+            placeholder='Add Description for the category'
+            rows={3}
+            name='description'
+            onChange={(e)=>onValueChange(e)}
+            />
         <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Choose Color</InputLabel>
             <Select
@@ -101,6 +109,7 @@ const CreateCategory=({openCreateCategory,setOpenCreateCategory})=>{
           {color.label}
         </MenuItem>
       ))}
+      
                
             </Select>
         </FormControl>

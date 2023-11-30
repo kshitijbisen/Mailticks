@@ -34,5 +34,9 @@ export const API_URLS={
     createcategory:{
         endpoint:'createcategory',
         method:'POST'
-    }
+    },
+    deleteEmails: {
+        endpoint: 'delete',
+        method: 'DELETE'
+    },
 }
