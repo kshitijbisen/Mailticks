@@ -16,8 +16,27 @@ except Exception as e:
     from pymongo import MongoClient
 
 
-db = client["test"]  # Replace with your database name
-collection = db["emails"]  # Replace with your collection name
+db = client["test"]  
+collection = db["emails"]  
+category_db=db["categories"]
+feedback_db=db["feedbacks"]
+
+categories=category_db.find()
+category_options=""""""
+
+for data in categories:
+    category_options=category_options + "- " + data['category'] +" ("+data['description']+")" +"\n"
+    
+print(category_options)
+
+feedbacks=feedback_db.find()
+feedback_prompt=""""""
+
+for data in feedbacks:
+    feedback_prompt=feedback_prompt+'Text: ' + data['mail'] + 'Categories: ' + data['category'] 
+
+print(feedback_prompt)
+
 
 import imaplib
 import email
@@ -81,6 +100,8 @@ for email_id in email_ids:
     subject, _ = decode_header(msg["Subject"])[0]
     from_, _ = decode_header(msg.get("From"))[0]
     date_, _ = (decode_header(msg.get("Date"))[0])
+    date_=date_[:26]+"+0530"
+    print(date_)
     
     date_object =datetime.strptime(date_, "%a, %d %b %Y %H:%M:%S %z")
     print(date_object)
@@ -92,15 +113,18 @@ for email_id in email_ids:
                  content=content+part.get_payload(decode=True).decode("utf-8")
     else:
         content=content+msg.get_payload(decode=True).decode("utf-8")
-    response = model.predict(
-"""Define the categories for the text below?
+    content=subject+"\n"+content
+    prompt="""Define the categories for the text below?
 Options:
-- feedback  (Mails regarding feedbacks about products and services from users)
-- job (Mails regarding job recruitment and job applications from companies and recruiters or HR)
+"""+category_options+"""
+
+"""+feedback_prompt+"""
 
 Text: """+content+"""
 Categories:
-""",
+"""
+    response = model.predict(
+prompt,
     **parameters
 )
     print(response.text)

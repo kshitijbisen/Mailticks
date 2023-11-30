@@ -87,7 +87,7 @@ const ViewEmail = () => {
 
                         <Typography style={{ marginTop:11}}>{email.name}
                             <Box component="span">
-                                &nbsp;&#60;{email.to}&#62;
+                                &nbsp;&#60;{email.from}&#62;
                             </Box>
                         </Typography>
 

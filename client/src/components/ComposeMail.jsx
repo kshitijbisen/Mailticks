@@ -73,22 +73,22 @@ const SendButton=styled(Button)({
       if(window.Email){
          window.Email.send({
             ...config,
-            To : data["to"],
-            From : 'gamerzkshitij@gmail.com',
-            Subject : data["subject"],
-            Body : data["body"],
+            To : data.to,
+            From : 'test.mailticks@gmail.com',
+            Subject : data.subject,
+            Body : data.body,
         }).then(
           message => alert(message)
         );
       }
       const payload={
          to:data.to,
-         from:'gamerzkshitij@gmail.com',
+         from:'test.mailticks@gmail.com',
          subject:data.subject,
          body:data.body,
-         date:new Date(),
+         Date:new Date(),
          image:'',
-         name:'Kshitij Bisen',
+         name:'Mailticks',
          starred:false,
          type:'draft'
       }
@@ -118,7 +118,7 @@ const SendButton=styled(Button)({
       from:'gamerzkshitij@gmail.com',
       subject:data.subject,
       body:data.body,
-      date:new Date(),
+      Date:new Date(),
       image:'',
       name:'Kshitij Bisen',
       starred:false,
@@ -134,7 +134,9 @@ const SendButton=styled(Button)({
 }
    
 const onValueChange=(e)=>{
+   e.preventDefault();
    setData({...data,[e.target.name]:e.target.value});
+   console.log(data)
 }
 
     return(

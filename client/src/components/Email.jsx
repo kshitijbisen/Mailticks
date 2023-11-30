@@ -39,13 +39,19 @@ const Date=styled(Typography)({
     color:'#FFFFFF'
     
 })
-const Email=({email, selectedEmails,setRefreshScreen,category})=>{
+const Email=({email, selectedEmails,setSelectedEmails,setRefreshScreen,category})=>{
     const  navigate=useNavigate();
     const toggleStarredService=useApi(API_URLS.toggleStarredEmails);
     const categoryArray = category?.response || [];
     const categoryInfo = categoryArray.find(item => item.category === email.category);
     
-    
+    const handleChange = () => {
+        if (selectedEmails.includes(email._id)) {
+            setSelectedEmails(prevState => prevState.filter(id => id !== email._id));
+        } else {
+            setSelectedEmails(prevState => [...prevState, email._id]);
+        }
+    }
     const toggleStarredMails=()=>{
         toggleStarredService.call({id:email._id,value:!email.starred})
         setRefreshScreen(prevState=>!prevState);
@@ -53,7 +59,8 @@ const Email=({email, selectedEmails,setRefreshScreen,category})=>{
     return(
         <Wrapper>
             <Checkbox size='small' style={{color:"#FFFFFF"}}
-            checked={selectedEmails.includes(email._id)}/>
+            checked={selectedEmails.includes(email._id)}
+            onChange={() => handleChange()} />
             {
                 email.starred?
                     <Star fontSize='small' style={{marginRight:10,color:"#FFF200"}}  onClick={()=>toggleStarredMails()}/> :
@@ -66,7 +73,7 @@ const Email=({email, selectedEmails,setRefreshScreen,category})=>{
             <Typography noWrap style={{width:'400px', overflow:'hidden'}}>{email.subject} {email.body && '-'} {email.body}</Typography>
             {
             email?.type==='inbox'?
-            <Chip label={email.category} style={{background:categoryInfo.color, minWidth:'100px',marginLeft:'100px'}}/>:<></>
+            <Chip label={email.category} style={{background:categoryInfo.color||'#FFFFFF', minWidth:'100px',marginLeft:'100px'}}/>:<></>
             }       
         
             <Date>{new window.Date(email.Date).getDate()} {new window.Date(email.Date).toLocaleDateString('default', {month:'long'})}</Date>
