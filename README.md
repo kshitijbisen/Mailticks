@@ -5,5 +5,6 @@ dynamically added categories.
 • Used Google Cloud’s Vertex AI LLM Tools for Dynamic Categorization and Grouping.
 • For Database used MongoDB and mongoose to integrate it with the Web Application.
 • Improved convenience and Clutter Free Emails.
-![Uploading image.png…]()
+![image](https://github.com/kshitijbisen/Mailticks/assets/78840091/c7795fbc-bbd1-4981-81a2-6bdded30b5ed)
+
 
