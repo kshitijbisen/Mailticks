@@ -5,3 +5,5 @@ dynamically added categories.
 • Used Google Cloud’s Vertex AI LLM Tools for Dynamic Categorization and Grouping.
 • For Database used MongoDB and mongoose to integrate it with the Web Application.
 • Improved convenience and Clutter Free Emails.
+![Uploading image.png…]()
+
